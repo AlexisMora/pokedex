@@ -1,6 +1,12 @@
+import { FC } from "react"
+import { Pokemon } from "../interfaces/pokemon.interface"
 import TypeBadge from "./TypeBadge"
 
-const PokemonCard = () => {
+interface Props {
+    pokemon: Pokemon
+}
+
+const PokemonCard:FC<Props> = ({ pokemon }) => {
   return (
   <div className="flex flex-wrap items-center justify-center">
     <div className="relative flex-shrink-0 max-w-xs mx-2 mb-6 overflow-hidden bg-yellow-500 rounded-lg shadow-lg">
@@ -11,8 +17,8 @@ const PokemonCard = () => {
                 </div>
                 <div className="relative px-6 pb-6 mt-6 text-white">
                     <div className="flex justify-between">
-                        <span className="block text-xl font-semibold">
-                            Pikachu
+                        <span className="block text-xl font-semibold capitalize">
+                            {pokemon.name}
                         </span>
                         <TypeBadge type="electric"/>
                     </div>
