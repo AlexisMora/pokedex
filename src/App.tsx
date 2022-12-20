@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
+import { connect, Connect, useDispatch, useSelector } from "react-redux"
 import { getPokemons } from "./api"
+import { setPokemons } from "./actions/index"
 import PokemonList from "./components/PokemonList"
 import Searcher from "./components/Searcher"
 import { Pokemon } from "./interfaces/pokemon.interface"
 import logo from './statics/pokedex_logo.png'
 
-const App = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([])
+const App:FC = () => {
+  const pokemons = useSelector((state: any) => state.pokemons)
+  const dispatch = useDispatch()
   useEffect(() => {
-    console.log('App mounted')
-    const fetchPokemons = async () => { 
-      const pokemons = await getPokemons()
-      setPokemons(pokemons)
+    const getPokemonsFromApi = async () => {
+      const response = await getPokemons()
+      dispatch(setPokemons(response))
     }
-    fetchPokemons()
+    getPokemonsFromApi()
   }, [])
   return (
     <>
