@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from "react"
 import { connect, Connect, useDispatch, useSelector } from "react-redux"
 import { getPokemonDetail, getPokemons } from "./api"
-import { setPokemons } from "./actions/index"
+import { getPokemonWithDetails, setPokemons } from "./actions/index"
 import PokemonList from "./components/PokemonList"
 import Searcher from "./components/Searcher"
-import { PokemonOverview } from "./interfaces/pokemon.interface"
 import logo from './statics/pokedex_logo.png'
 
 const App:FC = () => {
@@ -13,10 +12,7 @@ const App:FC = () => {
   useEffect(() => {
     const getPokemonsFromApi = async () => {
       const response = await getPokemons()
-      const pokemonDetails = await Promise.all(
-        response.map((pokemon: PokemonOverview) => getPokemonDetail(pokemon))
-      )
-      dispatch(setPokemons(pokemonDetails))
+      dispatch(getPokemonWithDetails(response))
     }
     getPokemonsFromApi()
   }, [])
