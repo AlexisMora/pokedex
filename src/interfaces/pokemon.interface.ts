@@ -21,6 +21,14 @@ export interface PokemonDetail {
     species: any
     sprites: any
     stats: any[]
-    types: any[]
+    types: Type[]
     weight: number
+}
+
+export interface Type {
+    slot: number
+    type: {
+        name: string
+        url: string
+    }
 }
