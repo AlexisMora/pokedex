@@ -1,9 +1,9 @@
 import { FC } from "react"
-import { Pokemon } from "../interfaces/pokemon.interface"
+import { PokemonDetail, PokemonOverview } from "../interfaces/pokemon.interface"
 import PokemonCard from "./PokemonCard"
 
 interface Props {
-    pokemons: Pokemon[]
+    pokemons: PokemonDetail[]
 }
 
 const PokemonList:FC<Props> = ({ pokemons }) => {

@@ -6,7 +6,9 @@ export const logger = (store: any) => (next: any) => (action: any) => {
 export const featuring = (store: any) => (next: any) => (action: any) => {
     const featured = [{ 
         name: 'Alexis Mora',
-        img: 'https://alexismora.dev/_nuxt/assets/alexis_mora.8b8613f9.jpg'
+        sprites: {
+            front_default: 'https://alexismora.dev/_nuxt/assets/alexis_mora.8b8613f9.jpg'
+        }
     },
         ...action.payload]
     // Future img:

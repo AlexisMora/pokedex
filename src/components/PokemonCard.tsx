@@ -1,9 +1,9 @@
 import { FC } from "react"
-import { Pokemon } from "../interfaces/pokemon.interface"
+import { PokemonDetail, PokemonOverview } from "../interfaces/pokemon.interface"
 import TypeBadge from "./TypeBadge"
 
 interface Props {
-    pokemon: Pokemon
+    pokemon: PokemonDetail
 }
 
 const PokemonCard:FC<Props> = ({ pokemon }) => {
@@ -14,9 +14,9 @@ const PokemonCard:FC<Props> = ({ pokemon }) => {
             <picture>
                 <img
                 className="relative w-40 rounded-md"
-                src={ pokemon.img ? pokemon.img
+                src={ pokemon.sprites.front_default ? pokemon.sprites.front_default
                     : "https://i.seadn.io/gae/TjAYyDT-QZbmLvq1oso_MaajwO-yk4O5sBUrbUk7-GzQFheA3YRZz4Dn5-gUpDICivs9istK07RqeUogJpokIHlI6h2gbMtSwnfrFA?auto=format&w=1000" }
-                alt="pikachu"/>
+                alt={pokemon.name}/>
             </picture>
                 </div>
                 <div className="relative px-6 pb-6 mt-6 text-white">
