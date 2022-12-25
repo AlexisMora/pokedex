@@ -1,18 +1,22 @@
 import { FC, useEffect, useState } from "react"
 import { connect, Connect, useDispatch, useSelector } from "react-redux"
 import { getPokemonDetail, getPokemons } from "./api"
-import { getPokemonWithDetails, setPokemons } from "./actions/index"
+import { getPokemonWithDetails, setLoading, setPokemons } from "./actions/index"
 import PokemonList from "./components/PokemonList"
 import Searcher from "./components/Searcher"
 import logo from './statics/pokedex_logo.png'
+import Loader from "./components/Loader"
 
 const App:FC = () => {
   const pokemons = useSelector((state: any) => state.pokemons)
+  const loading = useSelector((state: any) => state.loading)
   const dispatch = useDispatch()
   useEffect(() => {
     const getPokemonsFromApi = async () => {
+      dispatch(setLoading(true))
       const response = await getPokemons()
       dispatch(getPokemonWithDetails(response))
+      dispatch(setLoading(false))
     }
     getPokemonsFromApi()
   }, [])
@@ -23,9 +27,11 @@ const App:FC = () => {
         <div className="mt-2 flex flex-col items-center justify-start w-full px-20 text-center">
           <Searcher />
         </div>
-        <div className="mt-6 flex flex-row items-center justify-center w-full px-20 text-center">
-          <PokemonList pokemons={pokemons} />
-        </div>
+          {loading 
+          ? ( <Loader /> )
+          : ( <div className="mt-6 flex flex-row items-center justify-center w-full px-20 text-center">
+                <PokemonList pokemons={pokemons} />
+            </div> )}
       </div>
     </>
   )
