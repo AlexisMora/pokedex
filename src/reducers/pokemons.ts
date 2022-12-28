@@ -1,16 +1,14 @@
-import { SET_LOADING, SET_POKEMONS } from './../actions/types'
-export const initialState = {
+import { fromJS, setIn } from 'immutable'
+import { SET_POKEMONS } from './../actions/types'
+export const initialState = fromJS({
     pokemons: [],
-    loading: false
-}
+})
 
 export const pokemonsReducer = (state = initialState, action: any) => {
     const { type, payload } = action
     switch(type) {
         case SET_POKEMONS:
-            return {...state, pokemons: payload}
-        case SET_LOADING:
-            return {...state, loading: payload}
+            return setIn(state, ['pokemons'], fromJS(payload))
         default:
             return state
     }
