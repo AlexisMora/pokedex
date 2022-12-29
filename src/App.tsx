@@ -1,24 +1,17 @@
-import { FC, useEffect, useState } from "react"
-import { connect, Connect, shallowEqual, useDispatch, useSelector } from "react-redux"
-import { getPokemonDetail, getPokemons } from "./api"
-import { getPokemonWithDetails, setLoading, setPokemons } from "./actions/index"
+import { FC, useEffect} from "react"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import PokemonList from "./components/PokemonList"
 import Searcher from "./components/Searcher"
 import logo from './statics/pokedex_logo.png'
 import Loader from "./components/Loader"
+import { fetchPokemonsWithDetails } from "./slices/dataSlice"
 
 const App:FC = () => {
-  const pokemons = useSelector((state: any) => state.getIn(['data', 'pokemons'], shallowEqual).toJS())
-  const loading = useSelector((state: any) => state.getIn(['ui', 'loading']))
-  const dispatch = useDispatch()
+  const pokemons = useSelector((state: any) => state.data.pokemons, shallowEqual)
+  const loading = useSelector((state: any) => state.ui.loading)
+  const dispatch = useDispatch<any>()
   useEffect(() => {
-    const getPokemonsFromApi = async () => {
-      dispatch(setLoading(true))
-      const response = await getPokemons()
-      dispatch(getPokemonWithDetails(response))
-      dispatch(setLoading(false))
-    }
-    getPokemonsFromApi()
+    dispatch(fetchPokemonsWithDetails())
   }, [])
   return (
     <>
