@@ -5,7 +5,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import { applyMiddleware, compose, legacy_createStore as createStore } from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from './reducers/rootReducer'
+import rootReducer from './store/reducers/rootReducer'
 
 const composeAlt = (window as any ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

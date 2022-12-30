@@ -4,10 +4,10 @@ import PokemonList from "./components/PokemonList"
 import Searcher from "./components/Searcher"
 import logo from './statics/pokedex_logo.png'
 import Loader from "./components/Loader"
-import { fetchPokemonsWithDetails } from "./slices/dataSlice"
+import { fetchPokemonsWithDetails } from "./store/slices/dataSlice"
 
 const App:FC = () => {
-  const pokemons = useSelector((state: any) => state.data.pokemons, shallowEqual)
+  const pokemons = useSelector((state: any) => state.data.pokemonsFiltered, shallowEqual)
   const loading = useSelector((state: any) => state.ui.loading)
   const dispatch = useDispatch<any>()
   useEffect(() => {
